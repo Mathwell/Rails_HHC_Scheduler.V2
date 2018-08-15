@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_185601) do
+ActiveRecord::Schema.define(version: 2018_08_15_174452) do
+
+  create_table "aids", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "attractions", force: :cascade do |t|
     t.string "name"
@@ -20,6 +27,25 @@ ActiveRecord::Schema.define(version: 2018_08_14_185601) do
     t.integer "min_height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "nurses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "nurse_id"
+    t.integer "aid_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aid_id"], name: "index_patients_on_aid_id"
+    t.index ["nurse_id"], name: "index_patients_on_nurse_id"
   end
 
   create_table "rides", force: :cascade do |t|
@@ -32,15 +58,23 @@ ActiveRecord::Schema.define(version: 2018_08_14_185601) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
     t.string "password_digest"
-    t.integer "happiness"
-    t.integer "tickets"
-    t.integer "height"
-    t.integer "nausea"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.integer "patient_id"
+    t.integer "nurse_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nurse_id"], name: "index_visits_on_nurse_id"
+    t.index ["patient_id"], name: "index_visits_on_patient_id"
   end
 
 end
