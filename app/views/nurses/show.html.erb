@@ -4,7 +4,7 @@
 <div class="center">
 
   <div class="info">
-    <p><strong>Name:</strong> <%= @nurse.last_name %></p>
+    <p><strong>Name:</strong> <%= @nurse.first_name+" "+@nurse.last_name %> </p>
 
     <p><strong>Total Number of Visits:</strong> <%= @nurse.visits.count %></p>
     <p><strong>Total Number of Patients:</strong> <%= @nurse.patients.count %></p>
