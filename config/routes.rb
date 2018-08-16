@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   delete "/signout", to: "sessions#destroy"
   post "/rides/new", to: "rides#new"
   resources :nurses
+  resources :patients
+  resources :visits
   resources :attractions
   resources :users
 end
