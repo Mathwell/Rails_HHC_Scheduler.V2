@@ -24,7 +24,7 @@
         <td><%= patient.first_name %></td>
         <td><%= patient.last_name %></td>
         <% if current_user.admin %>
-          <td><%= link_to "Edit #{patient.first_name} #{patient.last_name}", patient_path(patient) %></td>
+          <td><%= link_to "Edit #{patient.first_name} #{patient.last_name}", [:edit, patient] %></td>
         <% else %>
           <td>Edit</td>
         <% end %>

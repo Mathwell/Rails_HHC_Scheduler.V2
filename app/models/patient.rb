@@ -1,5 +1,5 @@
 class Patient < ApplicationRecord
   has_many :visits
-  belongs_to :nurse
-  belongs_to :aid
+  has_many :nurses, :through => :visits
+
 end

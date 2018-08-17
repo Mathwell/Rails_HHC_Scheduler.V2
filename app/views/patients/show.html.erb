@@ -1,2 +1,21 @@
 <h1>Patients#show</h1>
 <p>Find me in app/views/patients/show.html.erb</p>
+
+<p id="notice"><%= notice %></p>
+
+<div class="center">
+
+  <div class="info">
+    <p><strong>Name:</strong> <%= @patient.first_name+" "+@patient.last_name %> </p>
+
+    <p><strong>Total Number of Visits:</strong> <%= @patient.visits.count %></p>
+    <p><strong>Total Number of Nurses:</strong> <%= @patient.nurses.count %></p>
+
+    <% if current_user.admin %>
+      <%= link_to 'Edit Patient', [:edit, @patient] %></p>
+    <% else %>
+
+    <% end %>
+    <%= link_to 'Back', patients_path,class: "btn btn-primary btn-light" %></p>
+  </div>
+</div>

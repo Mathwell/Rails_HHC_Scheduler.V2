@@ -25,8 +25,8 @@ class PatientsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @patient.update(nurse_params)
-        format.html { redirect_to @patient, notice: 'Nurse account was successfully updated.' }
+      if @patient.update(patient_params)
+        format.html { redirect_to @patient, notice: 'Patient account was successfully updated.' }
       else
         format.html { render :edit }
       end

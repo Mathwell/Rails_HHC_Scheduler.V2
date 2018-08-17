@@ -40,12 +40,8 @@ ActiveRecord::Schema.define(version: 2018_08_15_174452) do
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "nurse_id"
-    t.integer "aid_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["aid_id"], name: "index_patients_on_aid_id"
-    t.index ["nurse_id"], name: "index_patients_on_nurse_id"
   end
 
   create_table "rides", force: :cascade do |t|
