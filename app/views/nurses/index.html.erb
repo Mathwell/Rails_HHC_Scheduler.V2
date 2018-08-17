@@ -22,7 +22,7 @@
 
         <td><%= nurse.first_name %></td>
         <td><%= nurse.last_name %></td>
-        <td><%= link_to "#{nurse.first_name}'s Patients", patients_path %></td>
+        <td><%= link_to "#{nurse.first_name}'s Patients", nurse_patients_path(nurse.id) %></td>
         <td><%= link_to "#{nurse.first_name};s Visits", visits_path %></td>
         <% if current_user.admin %>
           <td><%= link_to "Edit #{nurse.first_name} #{nurse.last_name}", [:edit, nurse] %></td>

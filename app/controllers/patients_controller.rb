@@ -16,6 +16,9 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
+    @nurse=Nurse.find(@patient.nurse_id)
+    #@nurse.patients<<@patient
+    #raise @nurse.inspect
     #binding.pry
     respond_to do |format|
       if @patient.save
@@ -49,8 +52,16 @@ class PatientsController < ApplicationController
   end
 
   def index
-    @nurses=Nurse.all
-    @patients=Patient.all
+    #raise params.inspect
+    if params[:nurse_id]
+      @nurse=Nurse.find(params[:nurse_id])
+       @patients=@nurse.patients
+      #raise @nurse.inspect
+    else
+      @patients=Patient.all
+    end
+    #@nurses=Nurse.all
+    #@patients=Patient.all
   end
 
   def show
