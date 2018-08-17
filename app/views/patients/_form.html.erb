@@ -1,4 +1,4 @@
-<%= form_for(@nurse) do |f| %>
+<%= form_for(@patient) do |f| %>
 
   <div class="form-group">
     <%= f.label :first_name %><br>
@@ -8,10 +8,6 @@
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name, class: "form-control" %></div>
 
-
-    <div class="form-group">
-      <%= f.label :role %><br>
-      <%= f.text_field :role, class: "form-control" %></div>
 
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>

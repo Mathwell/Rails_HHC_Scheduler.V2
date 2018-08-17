@@ -7,9 +7,12 @@ class NursesController < ApplicationController
   def create
     @nurse = Nurse.new(nurse_params)
     respond_to do |format|
+      #raise @nurse.inspect
       if @nurse.save
         format.html { redirect_to @nurse, notice: 'New nurse account was successfully created.' }
+        raise @nurse.inspect
       else
+
         format.html { render :new }
       end
     end

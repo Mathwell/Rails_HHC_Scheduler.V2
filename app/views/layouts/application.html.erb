@@ -23,7 +23,7 @@
           <ul class="nav navbar-nav">
             <% if current_user %>
               <li><%= link_to "Hello, #{current_user.first_name}!", user_path(current_user) %></li>
-              <li><%= link_to "Patients", attractions_path %></li>
+              <li><%= link_to "Patients", patients_path %></li>
               <li><%= link_to "Nurses", nurses_path %></li>
               <li><%= link_to "HHAs", attractions_path %></li>
               <li><%= link_to "Log Out", signout_path, method: :delete %></li>
