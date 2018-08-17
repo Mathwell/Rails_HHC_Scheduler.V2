@@ -10,7 +10,8 @@
 
     <div class="form-group">
       <%= f.label :last_name %><br>
-      <%= f.number_field :nurse_id, class: "form-control" %></div>
+      <%= f.collection_select :nurse_id, Nurse.order(:last_name),:id,:name,class: "form-control" %></div>
+
 
 
   <div class="actions">
