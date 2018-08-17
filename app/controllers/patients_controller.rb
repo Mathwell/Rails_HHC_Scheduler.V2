@@ -41,6 +41,7 @@ class PatientsController < ApplicationController
   end
 
   def index
+    @nurses=Nurse.all
     @patients=Patient.all
   end
 

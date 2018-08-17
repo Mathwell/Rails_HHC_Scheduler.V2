@@ -4,6 +4,9 @@
 
 <h1>Patients</h1>
 
+<% select_tag "nurses", options_from_collection_for_select(@nurses, "id", "last_name"), include_blank: true %>
+<% select("nurse", "nurse_id", Nurse.all.collect {|p| [ p.last_name, p.id ] }, { include_blank: true }) %>
+
 <table class="table">
   <thead>
     <tr>
