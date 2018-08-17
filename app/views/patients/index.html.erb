@@ -5,17 +5,13 @@
 
 
 <%= form_for :nurse, :url => {:action => "choose_nurse", :id => @nurse} do |f|%>
-<%= f.label :last_name %><br>
-<%= f.collection_select :id, Nurse.order(:last_name),:id,:last_name, include_blank: true, class: "form-control" %>
-<%=f.submit%>
+<%= f.label "nurse" %><br>
+<%= f.collection_select :id, Nurse.order(:last_name),:id,:name, include_blank: true, class: "form-control" %>
+<%=f.submit "filter"%>
 
 <%end%> </div>
 
-<select name="nurse_id">
-    <% Nurse.all.each do |nurse| %>
-        <option value="<%= nurse.id %>"><%= nurse.first_name %></option>
-    <% end %>
-</select>
+
 <br> <br>
 
 

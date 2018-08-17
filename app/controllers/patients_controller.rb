@@ -3,11 +3,17 @@ class PatientsController < ApplicationController
 
   def choose_nurse
     #raise params.inspect
-    @nurse=Nurse.find(params[:nurse][:id])
-    @patients=@nurse.patients
-      respond_to do |format|
-    format.html { redirect_to patients_path }
-  end
+    if params[:nurse][:id]!=""
+       @nurse=Nurse.find(params[:nurse][:id])
+       @patients=@nurse.patients
+        respond_to do |format|
+          format.html { redirect_to nurse_patients_path(@nurse.id) }
+       end
+     else
+       respond_to do |format|
+         format.html { redirect_to patients_path }
+      end
+    end
   end
 
   def new
