@@ -25,13 +25,13 @@
         <td><%= link_to "#{nurse.first_name}'s Patients", patients_path %></td>
         <td><%= link_to "#{nurse.first_name};s Visits", visits_path %></td>
         <% if current_user.admin %>
-          <td><%= link_to "Edit #{nurse.first_name} #{nurse.last_name}", nurse_path(nurse) %></td>
+          <td><%= link_to "Edit #{nurse.first_name} #{nurse.last_name}", [:edit, nurse] %></td>
         <% else %>
           <td>Edit</td>
         <% end %>
         <% if current_user.admin %>
-          <td><%= link_to "Delete #{nurse.first_name} #{nurse.last_name}", nurse_path(nurse) %></td>
-        <% else %>
+          <td><%= link_to "Delete #{nurse.first_name} #{nurse.last_name}", nurse, :method => :delete, data: {:confirm => "You sure?" } , :title => "Delete #{nurse.first_name}" %></td>
+          <% else %>
           <td>Delete</td>
         <% end %>
       </tr>

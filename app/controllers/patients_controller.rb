@@ -36,7 +36,7 @@ class PatientsController < ApplicationController
   def destroy
     @patient.destroy
     respond_to do |format|
-      format.html { redirect_to attractions_url, notice: 'Nurse account was successfully destroyed.' }
+      format.html { redirect_to patients_url, notice: 'Nurse account was successfully destroyed.' }
     end
   end
 
@@ -56,7 +56,8 @@ class PatientsController < ApplicationController
     def patient_params
       params.require(:patient).permit(
         :first_name,
-        :last_name
+        :last_name,
+        :nurse_id
             )
     end
 end

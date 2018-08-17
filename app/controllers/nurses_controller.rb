@@ -10,7 +10,7 @@ class NursesController < ApplicationController
       #raise @nurse.inspect
       if @nurse.save
         format.html { redirect_to @nurse, notice: 'New nurse account was successfully created.' }
-        raise @nurse.inspect
+        #raise @nurse.inspect
       else
 
         format.html { render :new }
@@ -34,7 +34,7 @@ class NursesController < ApplicationController
   def destroy
     @nurse.destroy
     respond_to do |format|
-      format.html { redirect_to attractions_url, notice: 'Nurse account was successfully destroyed.' }
+      format.html { redirect_to nurses_url, notice: 'Nurse account was successfully destroyed.' }
     end
   end
 

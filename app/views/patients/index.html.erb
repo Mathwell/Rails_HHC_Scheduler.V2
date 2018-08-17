@@ -29,7 +29,8 @@
           <td>Edit</td>
         <% end %>
         <% if current_user.admin %>
-          <td><%= link_to "Delete #{patient.first_name} #{patient.last_name}", patient_path(patient) %></td>
+          <td><%= link_to "Delete #{patient.first_name} #{patient.last_name}", patient, :method => :delete, data: {:confirm => "You sure?" } , :title => "Delete #{patient.first_name}" %></td>
+
         <% else %>
           <td>Delete</td>
         <% end %>
