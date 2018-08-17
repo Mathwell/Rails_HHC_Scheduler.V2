@@ -1,6 +1,14 @@
 class PatientsController < ApplicationController
     before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
+  def choose_nurse
+    #raise params.inspect
+    @nurse=Nurse.find(params[:nurse][:id])
+    @patients=@nurse.patients
+      respond_to do |format|
+    format.html { redirect_to patients_path }
+  end
+  end
 
   def new
     @patient = Patient.new

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post "/sessions/create", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
   post "/rides/new", to: "rides#new"
+  post "/patients/choose_nurse", to: "patients#choose_nurse"
   resources :nurses
   resources :patients
   resources :visits

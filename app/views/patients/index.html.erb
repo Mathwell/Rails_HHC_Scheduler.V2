@@ -1,11 +1,26 @@
 <h1>Patients#index</h1>
 <p>Find me in app/views/patients/index.html.erb</p>
+<div class="form-group">
+
+
+
+<%= form_for :nurse, :url => {:action => "choose_nurse", :id => @nurse} do |f|%>
+<%= f.label :last_name %><br>
+<%= f.collection_select :id, Nurse.order(:last_name),:id,:last_name, include_blank: true, class: "form-control" %>
+<%=f.submit%>
+
+<%end%> </div>
+
+<select name="nurse_id">
+    <% Nurse.all.each do |nurse| %>
+        <option value="<%= nurse.id %>"><%= nurse.first_name %></option>
+    <% end %>
+</select>
+<br> <br>
+
 
 
 <h1>Patients</h1>
-
-<% select_tag "nurses", options_from_collection_for_select(@nurses, "id", "last_name"), include_blank: true %>
-<% select("nurse", "nurse_id", Nurse.all.collect {|p| [ p.last_name, p.id ] }, { include_blank: true }) %>
 
 <table class="table">
   <thead>
