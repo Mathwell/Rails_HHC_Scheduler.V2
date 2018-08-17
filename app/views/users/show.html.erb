@@ -18,8 +18,8 @@
     <p><strong>Name:</strong> <%= @user.first_name+" "+@user.last_name%></p>
     <p><strong>email:</strong> <%= @user.email %></p>
     <p><%= link_to 'Edit', edit_user_path(@user) %></p>
-    <p><%= link_to "See Patients.", attractions_path %></p>
-    <p><%= link_to "See Nurses", attractions_path %></p>
-    <p><%= link_to "See Home Health Aids.", attractions_path %></p>
+    <p><%= link_to "See Patients.", patients_path %></p>
+    <p><%= link_to "See Nurses", nurses_path %></p>
+    <p><%= link_to "See Home Health Aids.", aids_path %></p>
   </div>
 </div>
