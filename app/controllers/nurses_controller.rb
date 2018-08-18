@@ -4,6 +4,22 @@ class NursesController < ApplicationController
     @nurse = Nurse.new
   end
 
+  def filter_nurses
+    #raise params.inspect
+    if params[:nurse][:visits]!=""
+       @nurses=Nurse.where(visits: params[:nurse][:visits])
+       #@patients=@nurse.patients
+        respond_to do |format|
+          format.html { redirect_to nurses_path }
+       end
+     else
+       respond_to do |format|
+         format.html { redirect_to patients_path }
+      end
+    end
+  end
+
+
   def create
     @nurse = Nurse.new(nurse_params)
     respond_to do |format|

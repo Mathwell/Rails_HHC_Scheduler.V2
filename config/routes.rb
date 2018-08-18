@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   delete "/signout", to: "sessions#destroy"
   post "/rides/new", to: "rides#new"
   post "/patients/choose_nurse", to: "patients#choose_nurse"
+    post "/patients/filter_nurses", to: "nurses#filter_nurses"
   resources :nurses, only: [:show] do
    resources :patients, only: [:show, :index]
   end
@@ -41,4 +42,5 @@ Rails.application.routes.draw do
   resources :visits
   resources :attractions
   resources :users
+  resources :aids
 end

@@ -1,5 +1,16 @@
+<h1>Nurse Roster</h1>
 
-<h1>Nurses Rooster</h1>
+<div class="form-group">
+
+<%= form_for :nurse, :url => {:action => "filter_nurses", :id => @nurse} do |f|%>
+<%= f.label "nurse" %><br>
+<%= f.collection_select :visits, Nurse.order(:last_name),:id,:patient_count, include_blank: true, class: "form-control" %>
+<%=f.submit "filter"%>
+
+<%end%> </div>
+
+
+<br> <br>
 
 <table class="table">
   <thead>
