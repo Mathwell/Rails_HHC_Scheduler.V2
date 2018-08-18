@@ -1,2 +1,21 @@
 <h1>Visits#show</h1>
 <p>Find me in app/views/visits/show.html.erb</p>
+
+<p id="notice"><%= notice %></p>
+
+<div class="center">
+
+  <div class="info">
+    <p><strong>Patient:</strong> <%= @visit.patient.name %> </p>
+
+    <p><strong>Nurse:</strong> <%= @visit.nurse.name %></p>
+    <p><strong>Date:</strong> <%= @visit.date %></p>
+
+    <% if current_user.admin %>
+      <%= link_to 'Edit Visit', [:edit, @visit] %></p>
+    <% else %>
+
+    <% end %>
+    <%= link_to 'Back', visits_path,class: "btn btn-primary btn-light" %></p>
+  </div>
+</div>

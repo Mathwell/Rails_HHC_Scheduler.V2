@@ -1,2 +1,65 @@
 <h1>Visits#index</h1>
 <p>Find me in app/views/visits/index.html.erb</p>
+
+
+<div class="form-group">
+
+<%= form_for :visit, :url => {:action => "filter_by_nurse", :id => @nurse} do |f|%>
+<%= f.label "nurse" %><br>
+<%= f.collection_select :nurse_id, Nurse.order(:last_name),:id,:name, include_blank: true, class: "form-control" %> <br>
+<%= f.label "patient" %><br>
+<%= f.collection_select :patient_id, Patient.order(:last_name),:id,:name, include_blank: true, class: "form-control" %><br><br>
+<%=f.submit "filter"%>
+
+<%end%> </div>
+
+
+<br> <br>
+
+
+
+<h1>Visits</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Patient</strong></td>
+      <td><strong>Nurse</strong></td>
+      <td><strong>Edit</strong></td>
+      <td><strong>Delete</strong></td>
+    </tr>
+    <% @visits.each do |visit| %>
+      <tr>
+
+        <td><%= visit.patient.name %></td>
+        <td><%= visit.nurse.name %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Edit #{visit.nurse.name}'s visit to #{visit.patient.name}", [:edit, visit] %></td>
+        <% else %>
+          <td>Edit</td>
+        <% end %>
+        <% if current_user.admin %>
+          <td><%= link_to "Delete", visit, :method => :delete, data: {:confirm => "You sure?" } , :title => "Delete" %></td>
+
+        <% else %>
+          <td>Delete</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Visit', new_visit_path %></p>
+<% end %>

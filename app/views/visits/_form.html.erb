@@ -1,0 +1,24 @@
+<%= form_for(@visit) do |f| %>
+
+
+    <div class="form-group">
+      <%= f.label :nurse %><br>
+      <%= f.collection_select :nurse_id, Nurse.order(:last_name),:id,:name,class: "form-control" %></div>
+
+
+      <div class="form-group">
+        <%= f.label :patient %><br>
+        <%= f.collection_select :patient_id, Patient.order(:last_name),:id,:name,class: "form-control" %></div>
+
+
+    <div class="form-group">
+      <%= f.label :date %><br>
+      <%= f.text_field :date, "data-provide" => 'datepicker' %>
+    </div>
+
+
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

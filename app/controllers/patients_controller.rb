@@ -3,9 +3,9 @@ class PatientsController < ApplicationController
 
   def choose_nurse
     #raise params.inspect
-    if params[:nurse][:id]!=""
+    if !params[:nurse][:id].blank?
        @nurse=Nurse.find(params[:nurse][:id])
-       @patients=@nurse.patients
+       #@patients=Patient.by_nurse(params[:nurse][:id])
         respond_to do |format|
           format.html { redirect_to nurse_patients_path(@nurse.id) }
        end
@@ -59,9 +59,10 @@ class PatientsController < ApplicationController
 
   def index
     #raise params.inspect
-    if params[:nurse_id]
+    if !params[:nurse_id].blank?
       @nurse=Nurse.find(params[:nurse_id])
-       @patients=@nurse.patients
+      @patients=Patient.where(nurse_id: params[:nurse_id])
+      #@patients=@nurse.patients
       #raise @nurse.inspect
     else
       @patients=Patient.all
