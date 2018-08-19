@@ -1,5 +1,7 @@
 class Nurse < ApplicationRecord
   validate :is_title_case
+  validates :last_name, :first_name, presence: true
+  validates :last_name, :first_name, length: { minimum: 2 }
   before_validation :make_title_case
   has_many :visits
   has_many :patients, :through => :visits

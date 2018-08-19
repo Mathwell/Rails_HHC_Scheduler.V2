@@ -45,9 +45,9 @@ class VisitsController < ApplicationController
         #raise @patient.inspect
         format.html { redirect_to @visit, notice: 'New visit was successfully created.' }
       else
-        @visit.save
-        raise @visit.inspect
-        format.html { redirect_to visits_path }
+        #@visit.save
+        #raise @visit.inspect
+        format.html { render :new }
       end
     end
   end

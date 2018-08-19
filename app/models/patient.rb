@@ -1,9 +1,12 @@
 class Patient < ApplicationRecord
   validate :is_title_case
   before_validation :make_title_case
+  validates :last_name, :first_name, presence: true
+  validates :last_name, :first_name, length: { minimum: 2 }
   has_many :visits
   #has_many :nurses, :through => :visits
   belongs_to :nurse
+  #has_many :aids, :through => :visits
 
   def name
     return self.first_name+" "+self.last_name
