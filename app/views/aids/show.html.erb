@@ -1,2 +1,21 @@
 <h1>Aids#show</h1>
 <p>Find me in app/views/aids/show.html.erb</p>
+
+<p id="notice"><%= notice %></p>
+
+<div class="center">
+
+  <div class="info">
+    <p><strong>Name:</strong> <%= @aid.first_name+" "+@aid.last_name %> </p>
+
+    <p><strong>Total Number of Visits:</strong> <%= @aid.visits.count %></p>
+    <p><strong>Total Number of Patients:</strong> <%= @aid.patients.count %></p>
+    <p><strong>Role: HHA</strong> </p>
+    <% if current_user.admin %>
+      <%= link_to 'Edit Nurse', [:edit, @aid] %></p>
+    <% else %>
+
+    <% end %>
+    <%= link_to 'Back', aids_path,class: "btn btn-primary btn-light" %></p>
+  </div>
+</div>

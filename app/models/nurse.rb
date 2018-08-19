@@ -2,8 +2,7 @@ class Nurse < ApplicationRecord
   validate :is_title_case
   before_validation :make_title_case
   has_many :visits
-  has_many :patients
-  #, :through => :visits
+  has_many :patients, :through => :visits
 
   def name
     return self.first_name+" "+self.last_name
@@ -11,6 +10,10 @@ class Nurse < ApplicationRecord
 
   def patient_count
     return self.patients.count
+  end
+
+  def self.most_load
+     joins(:visits).group("nurses.id").order("COUNT(*) DESC").select("nurses.*").limit(3)
   end
 
   private

@@ -25,17 +25,24 @@ class VisitsController < ApplicationController
 
   def new
     @visit=Visit.new
+    if !params[:nurse_id].blank?
+      @visit.nurse_id=params[:nurse_id]
+    end
   end
 
   def create
     @visit = Visit.new(visit_params)
     @nurse=Nurse.find(@visit.nurse_id)
     @patient=Patient.find(@visit.patient_id)
+    @patient.nurse_id=@visit.nurse_id
+    #@nurse.patients<<@patient
     #@nurse.patients<<@patient
     #raise @nurse.inspect
     #binding.pry
     respond_to do |format|
       if @visit.save
+        @patient.save
+        #raise @patient.inspect
         format.html { redirect_to @visit, notice: 'New visit was successfully created.' }
       else
         @visit.save
@@ -51,6 +58,9 @@ class VisitsController < ApplicationController
   def update
     respond_to do |format|
       if @visit.update(visit_params)
+        @patient=Patient.find(@visit.patient_id)
+        @patient.update(nurse_id: @visit.nurse_id)
+
         format.html { redirect_to @visit, notice: 'Visit was successfully updated.' }
       else
         format.html { render :edit }
@@ -59,10 +69,15 @@ class VisitsController < ApplicationController
   end
 
   def destroy
+    @visit.destroy
+
+    respond_to do |format|
+      format.html { redirect_to visits_url, notice: 'Visit was successfully destroyed.' }
+    end
   end
 
   def index
-    raise params.inspect
+    #raise params.inspect
     if !params[:nurse_id].blank?
       @nurse=Nurse.find(params[:nurse_id])
       @visits=Visit.where(nurse_id: params[:nurse_id])

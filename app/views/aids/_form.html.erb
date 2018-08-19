@@ -1,4 +1,4 @@
-<%= form_for(@patient) do |f| %>
+<%= form_for(@aid) do |f| %>
 
   <div class="form-group">
     <%= f.label :first_name %><br>
@@ -8,14 +8,12 @@
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name, class: "form-control" %></div>
 
+
     <div class="form-group">
-      <%= f.label :nurse %><br>
-      <% if !params[:murse_id].blank? %>
-      <%  @patient.nurse_id=params[:nurse_id] %>
-      <%end%>
-      <%= f.collection_select :nurse_id, Nurse.order(:last_name),:id,:name,class: "form-control" %></div>
+      <%= f.label :role %><br>
 
-
+      <input type="text" size="20" value="HHA" class="form-control" />
+    </div>
 
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>

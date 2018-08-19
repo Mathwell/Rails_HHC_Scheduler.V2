@@ -1,2 +1,56 @@
 <h1>Aids#index</h1>
 <p>Find me in app/views/aids/index.html.erb</p>
+
+<h1>Home Health Aid Roster</h1>
+
+
+<br> <br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>First Name</strong></td>
+      <td><strong>Last Name</strong></td>
+      <td><strong>Role</strong></td>
+      <td><strong>Patients</strong></td>
+      <td><strong>Visits</strong></td>
+      <td><strong>Edit</strong></td>
+      <td><strong>Delete</strong></td>
+    </tr>
+    <% @aids.each do |aid| %>
+      <tr>
+
+        <td><%= aid.first_name %></td>
+        <td><%= aid.last_name %></td>
+        <td><%= aid.role %></td>
+        <td><%= link_to "#{aid.patients.count}", nurse_patients_path(aid.id) %></td>
+        <td><%= link_to "#{aid.visits.count}", nurse_visits_path(aid.id) %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Edit #{aid.name}", [:edit, aid] %></td>
+        <% else %>
+          <td>Edit</td>
+        <% end %>
+        <% if current_user.admin %>
+          <td><%= link_to "Delete #{aid.name}", aid, :method => :delete, data: {:confirm => "Delete #{aid.name}?" } , :title => "Delete #{aid.first_name}" %></td>
+          <% else %>
+          <td>Delete</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Aid', new_aid_path %></p>
+<% end %>

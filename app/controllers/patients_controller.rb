@@ -18,6 +18,9 @@ class PatientsController < ApplicationController
 
   def new
     @patient = Patient.new
+    if !params[:nurse_id].blank?
+      @patient.nurse_id=params[:nurse_id]
+    end
   end
 
   def create

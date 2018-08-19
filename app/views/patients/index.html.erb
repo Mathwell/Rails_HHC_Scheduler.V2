@@ -3,7 +3,12 @@
 <div class="form-group">
 
 <%= form_for :nurse, :url => {:action => "choose_nurse", :id => @nurse} do |f|%>
-<%= f.label "nurse" %><br>
+<%  if params[:nurse_id].blank?%>
+<%= f.label "Filter by Nurse/Aid"%>
+<% else%>
+<%= f.label "#{Nurse.find(params[:nurse_id]).role.upcase}" %>
+<%end%>
+<br>
 <%= f.collection_select :id, Nurse.order(:last_name),:id,:name, include_blank: true, class: "form-control" %>
 <%=f.submit "filter"%>
 
@@ -57,5 +62,10 @@
     <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
   </p>
 <% else %>
+  <% if params[:nurse_id].blank?%>
   <p><%= link_to 'New Patient', new_patient_path %></p>
+  <%else%>
+  <% @nurse=Nurse.find(params[:nurse_id])%>
+  <p><%= link_to 'New Patient', new_nurse_patient_path(@nurse) %></p>
+  <%end%>
 <% end %>

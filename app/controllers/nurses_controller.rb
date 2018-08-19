@@ -1,5 +1,6 @@
 class NursesController < ApplicationController
   before_action :set_nurse, only: [:show, :edit, :update, :destroy]
+
   def new
     @nurse = Nurse.new
   end
@@ -47,6 +48,13 @@ class NursesController < ApplicationController
     end
   end
 
+  def most_loaded
+    @nurses=Nurse.most_load
+    respond_to do |format|
+      format.html { render :index }
+    end
+  end
+
   def destroy
     @nurse.destroy
     respond_to do |format|
@@ -55,7 +63,7 @@ class NursesController < ApplicationController
   end
 
   def index
-    @nurses = Nurse.all
+    @nurses = Nurse.where(role: "nurse")
   end
 
   def show
@@ -63,6 +71,7 @@ class NursesController < ApplicationController
   end
 
   private
+
     def set_nurse
       @nurse = Nurse.find(params[:id])
     end
