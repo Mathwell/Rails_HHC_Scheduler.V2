@@ -8,12 +8,19 @@
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name, class: "form-control" %></div>
 
+
+
+
     <div class="form-group">
       <%= f.label :nurse %><br>
       <% if !params[:murse_id].blank? %>
       <%  @patient.nurse_id=params[:nurse_id] %>
       <%end%>
       <%= f.collection_select :nurse_id, Nurse.order(:last_name),:id,:name,class: "form-control" %></div>
+
+      <div class="form-group">
+        <%= f.label :visit_date %><br>
+        <%= f.text_field :date, class: "form-control" %></div>
 
 
 

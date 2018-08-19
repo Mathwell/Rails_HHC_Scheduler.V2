@@ -32,15 +32,15 @@ class VisitsController < ApplicationController
 
   def create
     @visit = Visit.new(visit_params)
-    @nurse=Nurse.find(@visit.nurse_id)
-    @patient=Patient.find(@visit.patient_id)
-    @patient.nurse_id=@visit.nurse_id
     #@nurse.patients<<@patient
     #@nurse.patients<<@patient
     #raise @nurse.inspect
     #binding.pry
     respond_to do |format|
       if @visit.save
+        @nurse=Nurse.find(@visit.nurse_id)
+        @patient=Patient.find(@visit.patient_id)
+        @patient.nurse_id=@visit.nurse_id
         @patient.save
         #raise @patient.inspect
         format.html { redirect_to @visit, notice: 'New visit was successfully created.' }

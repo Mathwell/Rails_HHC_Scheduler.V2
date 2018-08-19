@@ -8,6 +8,14 @@ class Patient < ApplicationRecord
   belongs_to :nurse
   #has_many :aids, :through => :visits
 
+  def self.date
+    joins(:visits).group("patients.id").order(date: :desc).limit(1)
+  end
+
+  def date
+    Patient.all.date
+  end
+
   def name
     return self.first_name+" "+self.last_name
   end

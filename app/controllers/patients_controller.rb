@@ -21,6 +21,8 @@ class PatientsController < ApplicationController
     if !params[:nurse_id].blank?
       @patient.nurse_id=params[:nurse_id]
     end
+    @visit=Visit.new
+
   end
 
   def create
@@ -31,6 +33,9 @@ class PatientsController < ApplicationController
     #binding.pry
     respond_to do |format|
       if @patient.save
+        #raise params.inspect
+        @visit=Visit.new(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
+        @visit.save
         format.html { redirect_to @patient, notice: 'New patient account was successfully created.' }
       else
         @patient.save
@@ -64,7 +69,7 @@ class PatientsController < ApplicationController
     #raise params.inspect
     if !params[:nurse_id].blank?
       @nurse=Nurse.find(params[:nurse_id])
-      @patients=Patient.where(nurse_id: params[:nurse_id])
+      @patients=Patient.where(nurse_id: params[:nurse_id]).uniq
       #@patients=@nurse.patients
       #raise @nurse.inspect
     else
