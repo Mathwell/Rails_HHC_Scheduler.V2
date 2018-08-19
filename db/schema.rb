@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_174452) do
+ActiveRecord::Schema.define(version: 2018_08_19_184535) do
 
   create_table "aids", force: :cascade do |t|
     t.string "first_name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_174452) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "uid", limit: 8
   end
 
   create_table "visits", force: :cascade do |t|
