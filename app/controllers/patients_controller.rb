@@ -36,7 +36,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       if @patient.save
         #raise params.inspect
-        if   if !@visit=Visit.find_by(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
+         if !@visit=Visit.find_by(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
           raise @visit.inspect
             @visit=Visit.new(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
             @visit.save

@@ -30,7 +30,8 @@ class SessionsController < ApplicationController
         u.first_name=auth['info']['name']
         u.last_name=auth['info']['name']
       end
-        @user.id=@user.uid
+       #binding.pry
+        @user.password="sdgggggggggjkkjl"
         @user.save
         session[:user_id] = @user.try(:id)
         #raise @user.inspect
