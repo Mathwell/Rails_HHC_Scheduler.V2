@@ -26,7 +26,9 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.new(patient_params)
+    if !@patient=Patient.find_by(first_name: params[:patient][:first_name], last_name: params[:patient][:last_name])
+      @patient = Patient.new(patient_params)
+    end
     @nurse=Nurse.find(@patient.nurse_id)
     #@nurse.patients<<@patient
     #raise @nurse.inspect
@@ -34,12 +36,16 @@ class PatientsController < ApplicationController
     respond_to do |format|
       if @patient.save
         #raise params.inspect
-        @visit=Visit.new(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
-        @visit.save
+        if   if !@visit=Visit.find_by(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
+          raise @visit.inspect
+            @visit=Visit.new(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
+            @visit.save
+
+          end
         format.html { redirect_to @patient, notice: 'New patient account was successfully created.' }
       else
-        @patient.save
-        raise @patient.inspect
+        #@patient.save
+        #raise @patient.inspect
         format.html { redirect_to patients_path }
       end
     end
@@ -51,6 +57,8 @@ class PatientsController < ApplicationController
   def update
     respond_to do |format|
       if @patient.update(patient_params)
+        @visit=Visit.new(nurse_id: @patient.nurse_id, patient_id: @patient.id, date: params[:patient][:date])
+        @visit.save
         format.html { redirect_to @patient, notice: 'Patient account was successfully updated.' }
       else
         format.html { render :edit }
@@ -59,6 +67,10 @@ class PatientsController < ApplicationController
   end
 
   def destroy
+    @visits=@patient.visits
+    @visits.each do |visit|
+      visit.destroy
+    end
     @patient.destroy
     respond_to do |format|
       format.html { redirect_to patients_url, notice: 'Nurse account was successfully destroyed.' }

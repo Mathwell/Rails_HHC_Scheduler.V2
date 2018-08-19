@@ -1,49 +1,42 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
 DATA = {
   :user_keys =>
-    ["name", "nausea", "happiness", "tickets", "height", "password"],
+    ["username", "first_name", "last_name", "email", "admin", "password"],
   :users => [
-    ["Max Charles", 0, 3, 6, 32, "password"],
-    ["Skai Jackson", 1, 3, 10, 60, "password"],
-    ["Kaleo Elam", 1, 2, 15, 59, "password"],
-    ["Megan Charpentier", 3, 1, 12, 60, "password"],
-    ["Hayden Byerly", 1, 1, 16, 58, "password"],
-    ["Tenzing Norgay Trainor", 0, 1, 10, 55, "password"],
-    ["Davis Cleveland", 1, 3, 5, 36, "password"],
-    ["Cole Sand", 2, 2, 7, 34, "password"],
-    ["Quvenzhané Wallis", 2, 2, 13, 30, "password"]
+    ["max", "Max", "Charles","max@gmail.com",true, "password"],
+    ["skai", "Skai", "Jackson", "skai@gmail.com", false, "password"],
+    ["kaleo", "Kaleo", "Elam", "kaleo@gmail.com", false,"password"],
+    ["olena", "Olena","Ag", "olena@gmail.com", true, "password"],
+
   ],
-  :attraction_keys =>
-   ["name", "nausea_rating", "happiness_rating", "tickets", "min_height"],
-  :attractions => [
-    ["Scrambler Ride", 2, 2, 2, 36],
-    ["Miniature Railroad", 0, 1, 2, 32],
-    ["Merry-Go-Round", 1, 1, 1, 30],
-    ["Roller Coaster", 1, 3, 4, 54],
-    ["Swinging Ship", 2, 2, 2, 36],
-    ["Go Karts", 1, 2, 3, 36],
-    ["Haunted Mansion", 1, 1, 1, 30],
-    ["Ferris Wheel", 1, 1, 2, 36],
-    ["Teacups Ride", 3, 1, 1, 28]
+  :nurse_keys =>
+   ["first_name", "last_name", "role"],
+  :nurses => [
+    ["Martha","Njoki","nurse"],
+    ["Ahn","Nguyen", "nurse"],
+    ["Brioso", "Lusia", "HHA"],
   ],
+
+  :patient_keys =>
+   ["first_name", "last_name", "nurse_id"],
+  :patients => [
+    ["Noel","Alcantara",1],
+    ["Maria","Garcia", 2],
+    ["Ponny", "Ly", 1],
+
+  ],
+
+
   :admins => [
-    "Mary Elitch Long",
-    "John Elitch"
+    "olena",
+    "max"
   ]
 }
 
 def main
   make_users
   make_admin
-  make_attractions_and_rides
+  make_nurses
+  make_patients
 end
 
 def make_users
@@ -57,25 +50,31 @@ def make_users
 end
 
 def make_admin
-  DATA[:admins].each do |name|
-    User.create(name: name, admin: true, password: 'password')
+  DATA[:admins].each do |username|
+    User.create(username: username, admin: true, password: 'password')
   end
 end
 
-def make_attractions_and_rides
-  DATA[:attractions].each do |attraction|
-    new_attraction = Attraction.new
-    attraction.each_with_index do |attribute, i|
-      new_attraction.send(DATA[:attraction_keys][i] + "=", attribute)
+def make_nurses
+  DATA[:nurses].each do |nurse|
+    new_nurse = Nurse.new
+    nurse.each_with_index do |attribute, i|
+      new_nurse.send(DATA[:nurse_keys][i] + "=", attribute)
     end
-    rand(1..8).times do
-      customers = []
-      User.all.each {|u| customers << u if u.admin != true}
-      new_attraction.users << customers[rand(0...customers.length)]
-    end
-    new_attraction.users.each {|c| c.save}
-    new_attraction.save
+    new_nurse.save
   end
 end
+
+def make_patients
+  DATA[:patients].each do |patient|
+    new_patient = Patient.new
+    patient.each_with_index do |attribute, i|
+      new_patient.send(DATA[:patient_keys][i] + "=", attribute)
+    end
+    new_patient.save
+  end
+end
+
+
 
 main
