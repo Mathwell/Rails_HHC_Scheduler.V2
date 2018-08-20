@@ -5,7 +5,7 @@ DATA = {
     ["max", "Max", "Charles","max@gmail.com",true, "password"],
     ["skai", "Skai", "Jackson", "skai@gmail.com", false, "password"],
     ["kaleo", "Kaleo", "Elam", "kaleo@gmail.com", false,"password"],
-    ["olena", "Olena","Ag", "olena@gmail.com", true, "password"],
+    ["olena", "Olena","Ageyeva", "olena@gmail.com", true, "password"],
 
   ],
   :nurse_keys =>
