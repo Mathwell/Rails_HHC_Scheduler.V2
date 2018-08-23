@@ -28,3 +28,11 @@
     <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<p id="notice"><%= notice %></p>
+
+<% if @message %>
+  <div class="center alert">
+    <p><%= @message %></p>
+  </div>
+<% end %>

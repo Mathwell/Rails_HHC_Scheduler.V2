@@ -46,7 +46,7 @@ class PatientsController < ApplicationController
       else
         #@patient.save
         #raise @patient.inspect
-        format.html { redirect_to patients_path }
+        format.html { redirect_to new_patient_path(@patient, nurse_id: @nurse.id), notice: @patient.errors.full_messages.join(" ")  }
       end
     end
   end
