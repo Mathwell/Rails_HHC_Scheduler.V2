@@ -1,0 +1,12 @@
+<h1> Patients with Most Visits </h>
+
+
+<h1>Patients</h1>
+
+    <% @patients.each do |patient| %>
+
+        <p><%= patient.first_name %></p>
+        <p><%= patient.last_name %></p>
+        
+    <% end %>
+  

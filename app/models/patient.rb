@@ -33,6 +33,10 @@ class Patient < ApplicationRecord
 
    end
 
+   def self.most_visits
+    joins(:visits).group("patients.id").order("COUNT(*) DESC").select("patients.*").limit(3)
+ end
+
    def make_title_case
      self.first_name = self.first_name.titlecase
      self.last_name = self.last_name.titlecase

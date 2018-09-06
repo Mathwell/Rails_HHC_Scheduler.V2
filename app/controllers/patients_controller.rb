@@ -95,6 +95,14 @@ class PatientsController < ApplicationController
     @visits = @patient.visits
   end
 
+  def most_visits
+    @patients=Patient.most_visits
+    #binding.pry
+    respond_to do |format|
+      format.html { render :mostvisits }
+    end
+  end
+
   private
     def set_patient
       @patient = Patient.find(params[:id])

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "/nurses/new", to: "nurses#new"
   get "/patients/new", to: "patients#new"
   get "/nurses/most_loaded", to:"nurses#most_loaded"
+  get "/patients/most_visits", to:"patients#most_visits"
+  
+  
   get '/auth/facebook/callback' => 'sessions#create'
 
   post "/patients/choose_nurse", to: "patients#choose_nurse"
