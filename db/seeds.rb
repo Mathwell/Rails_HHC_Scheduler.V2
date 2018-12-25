@@ -2,7 +2,7 @@ DATA = {
   :user_keys =>
     ["username", "first_name", "last_name", "email", "admin", "password"],
   :users => [
-    ["max", "Max", "Charles","max@gmail.com",true, "password"],
+    ["admin", "Admin_First_Name", "Admin_Last_Name","admin@email.com",true, "password"],
     ["skai", "Skai", "Jackson", "skai@gmail.com", false, "password"],
     ["kaleo", "Kaleo", "Elam", "kaleo@gmail.com", false,"password"],
     ["olena", "Olena","Ageyeva", "olena@gmail.com", true, "password"],
@@ -11,24 +11,30 @@ DATA = {
   :nurse_keys =>
    ["first_name", "last_name", "role"],
   :nurses => [
-    ["Martha","Njoki","nurse"],
-    ["Ahn","Nguyen", "nurse"],
-    ["Brioso", "Lusia", "HHA"],
+    ["Nurse1","Nurse1_Last_Name","nurse"],
+    ["Nurse2","Nurse2_Last_Name", "nurse"],
+    ["Nurse3","Nurse3_Last_Name", "nurse"],
   ],
 
   :patient_keys =>
    ["first_name", "last_name", "nurse_id"],
   :patients => [
-    ["Noel","Alcantara",1],
-    ["Maria","Garcia", 2],
-    ["Ponny", "Ly", 1],
+    ["Patient1","Patient1_Last_Name",1],
+    ["Patient2","Patient2_Last_Name",2],
+    ["Patient3","Patient3_Last_Name",1],
 
   ],
 
-
+:visit_keys =>
+["patient_id", "nurse_id", "date"],
+:visits =>[
+  [1,2,DateTime.strptime('01/11/2018', '%m/%d/%Y') ],
+  [2,2,DateTime.strptime('09/11/2018', '%m/%d/%Y') ],
+  [3,1,DateTime.strptime('01/03/2018', '%m/%d/%Y') ],
+],
   :admins => [
     "olena",
-    "max"
+    "admin"
   ]
 }
 
@@ -37,6 +43,7 @@ def main
   make_admin
   make_nurses
   make_patients
+  make_visits
 end
 
 def make_users
@@ -75,6 +82,17 @@ def make_patients
   end
 end
 
+def make_visits
+  DATA[:visits].each do |visit|
+    new_visit = Visit.new
+    visit.each_with_index do |attribute, i|
+      new_visit.send(DATA[:visit_keys][i] + "=", attribute)
+    end
+    
+    new_visit.save
+  end
+  #Visit.create(:nurse_id=> 2, :patient_id => 2, :date => DateTime.strptime('09/11/2009', '%m/%d/%Y'))
+end
 
 
 main
